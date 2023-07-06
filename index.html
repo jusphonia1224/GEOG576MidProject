@@ -1,1 +1,147 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+    <!-- meta for browser allow mobile design -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    
+    <title>MAMAMOO</title>
+
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .addRecordBtn {
+            position: absolute;
+            z-index: 10;
+            top: 10px;
+            left: 100px;
+            background-color: #0079c1;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .addRecordBtn:hover {
+            background-color: #005a87;
+        }
+
+    </style>
+
+    <!-- import css and esri.js lib -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.26/"></script>
+
+    <!-- loading modules -->
+    <script>
+        require([
+            "esri/config", 
+            "esri/Map", 
+            "esri/views/MapView", 
+            "esri/widgets/Locate", 
+            "esri/widgets/Search", 
+            "esri/layers/FeatureLayer",
+            "esri/Graphic",
+            "esri/layers/GraphicsLayer",
+            "esri/widgets/Legend"
+        ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Graphic, GraphicsLayer, Legend) => {
+            esriConfig.apiKey = "AAPK1bafb1fd1b984000a2a5ab965ed0cf111GDugMmnipDNIQH9yaN93addT3iTZzAKwGLSLBZvZJBkFTaRPkJjvEi2gCoqyJml";
+
+            const map = new Map({
+                basemap: "arcgis-topographic"
+            });
+
+            const view = new MapView({
+                container: "viewDiv", 
+                center: [127.0827439, 37.5393221], // Longitude, latitude of RBW Entertainment
+                zoom: 12, // Zoom level
+                map: map // References the map object
+            });
+
+            const locateBtn = new Locate({
+                view: view
+            });
+
+            const graphicsLayer = new GraphicsLayer();
+            map.add(graphicsLayer);
+
+            // Defining popup properties
+            const popupTemplate = {
+                //venue: "{Name}",
+                //type: "{Type} - {Subtype}",
+                //address: "{Address}",
+                //description: "{Description}",
+                //recordDate: "{RecordDate}",
+                //remarks: "{Remarks}",
+                //reference: "{Reference}"
+                "title": "{Type}",
+                "content": "<b>Venue:</b> {NAME}<br> \
+                            <b>Type:</b> {Type}<br> \
+                            <b>Address:</b> {Address}<br> \
+                            <b>Description:</b> {Description}<br> \
+                            <b>Record Date:</b> {RecordDate,}<br> \
+                            <b>Reference:</b> {Reference}<br> \
+                            <b>Remarks:</b> {Remarks}<br> "
+            }
+
+            // ----- Settings for layer - RBW related -----
+            const rbwRenderer = {
+                "type": "simple",
+                "symbol": {
+                    "type": "picture-marker",
+                    "url": "https://jusphonia1224.github.io/GEOG576MidProject/rbw.png",
+                    "width": "18px",
+                    "height": "18px"
+                }
+            }
+
+            const rbwLayer = new FeatureLayer({
+                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_1b2b3aee96e64070af0221ad89b77c0b_results/FeatureServer",
+                renderer: rbwRenderer, 
+                definitionExpression: "Type = 'RBW'",
+                outFields: ["NAME","Type","Address","Description","RecordDate","Reference","Remarks"],
+                popupTemplate: popupTemplate
+            });
+
+            map.add(rbwLayer);
+
+            // Add the locate widget to the top left corner of the view
+            view.ui.add(locateBtn, {
+                position: "top-left"
+            });
+
+            const searchWidget = new Search({
+                view: view
+            });
+
+            // Adds the search widget below other elements in the top left corner of the view
+            view.ui.add(searchWidget, {
+                position: "top-right",
+                index: 2
+            });
+
+        });
+    </script>
+
+  </head>
+  <body>
+    <header id="header" >
+        <div id="header_title">
+            <h1>MAMAMOO</h1>
+        </div>
+        <a href="https://arcg.is/00iuyj"target="_blank" class="addRecordBtn">Add Record</a>
+    </header>
+    <div id="viewDiv"></div>
+  </body>
+</html>
 
