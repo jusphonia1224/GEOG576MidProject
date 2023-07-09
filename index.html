@@ -109,6 +109,29 @@
 
             map.add(rbwLayer);
 
+            // ----- Settings for layer - P Nation related -----
+            const pNationRenderer = {
+                "type": "simple",
+                "symbol": {
+                    "type": "picture-marker",
+                    "url": "https://jusphonia1224.github.io/GEOG576MidProject/P_Nation_logo.png",
+                    "width": "20px",
+                    "height": "20px"
+                }
+            }
+
+            const pNationLayer = new FeatureLayer({
+                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_1b2b3aee96e64070af0221ad89b77c0b_results/FeatureServer",
+                renderer: pNationRenderer, 
+                definitionExpression: "Type = 'Agency' AND Subtype1 like 'P Nation%'",
+                outFields: ["NAME","Type","Subtype1","Address","Description","RecordDate","Reference","Remarks"],
+                popupTemplate: popupTemplate
+            });
+
+            pNationLayer_titleForLegend = pNationLayer.title = pNationLayer.name = 'P NATION';
+
+            map.add(pNationLayer);
+
             // Add the locate widget to the top left corner of the view
             view.ui.add(locateBtn, {
                 position: "top-left"
