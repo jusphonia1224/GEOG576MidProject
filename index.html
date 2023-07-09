@@ -99,7 +99,7 @@
 
             const rbwLayer = new FeatureLayer({
                 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_1b2b3aee96e64070af0221ad89b77c0b_results/FeatureServer",
-                renderer: rbwRenderer, 
+                //renderer: rbwRenderer, 
                 definitionExpression: "Type = 'Agency' AND Subtype1 like 'RBW%'",
                 outFields: ["NAME","Type","Subtype1","Address","Description","RecordDate","Reference","Remarks"],
                 popupTemplate: popupTemplate
