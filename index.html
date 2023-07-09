@@ -78,7 +78,7 @@
             // Defining popup properties
             const popupTemplate = {
                 "title": "{Name}",
-                "content": "<b>Type:</b> {Type}<br> \
+                "content": "<b>Type:</b> {Type} - {Subtype1}{Subtype2}{Subtype3}{Subtype4}<br> \
                             <b>Address:</b> {Address}<br> \
                             <b>Description:</b> {Description}<br> \
                             <b>Record Date:</b> {RecordDate,}<br> \
@@ -101,7 +101,7 @@
                 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_1b2b3aee96e64070af0221ad89b77c0b_results/FeatureServer",
                 renderer: rbwRenderer, 
                 definitionExpression: "Type = 'Agency' AND Subtype1 like 'RBW%'",
-                outFields: ["NAME","Type","Address","Description","RecordDate","Reference","Remarks"],
+                outFields: ["NAME","Type","Subtype1","Address","Description","RecordDate","Reference","Remarks"],
                 popupTemplate: popupTemplate
             });
 
