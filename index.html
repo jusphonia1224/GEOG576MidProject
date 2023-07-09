@@ -99,8 +99,38 @@
 
             const rbwLayer = new FeatureLayer({
                 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_1b2b3aee96e64070af0221ad89b77c0b_results/FeatureServer",
-                renderer: rbwRenderer, 
-                definitionExpression: "Type = 'Agency' AND Subtype1 like 'RBW%'",
+                renderer: {
+                    type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                    field: "Subtype1",  // contains values referenced in uniqueValueInfos
+                    uniqueValueInfos: [
+                        {
+                            value: "RBW Offices",  // features labeled as "high"
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/rbw.png",
+                                "width": "20px",
+                                "height": "20px"
+                            }
+                        }, {
+                            value: "RBW Cafes",  // features labeled as "medium"
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/rbw.png",
+                                "width": "20px",
+                                "height": "20px"
+                            } 
+                        }, {
+                            value: "P Nation",  // features labeled as "low"
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/P_Nation_logo.png",
+                                "width": "20px",
+                                "height": "20px"
+                            }
+                        }
+                    ]
+                }, 
+                definitionExpression: "Type = 'Agency' ",//AND Subtype1 like 'RBW%'",
                 outFields: ["NAME","Type","Subtype1","Address","Description","RecordDate","Reference","Remarks"],
                 popupTemplate: popupTemplate
             });
