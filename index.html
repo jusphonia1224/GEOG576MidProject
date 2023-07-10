@@ -286,14 +286,20 @@
                 content: legend
             });
 
-            view.ui.add(legendExpand, "bottom-right");
+            view.ui.add(legendExpand, "bottom-left");
 
             // Add Layer List Widget
             let layerList = new LayerList({
-                view: view
+                view: view,
+                container: document.createElement("div")
+            });
+
+            const layerListExpand = new Expand({
+                view: view,
+                content: layerList
             });
                         
-            view.ui.add(layerList, "bottom-left");
+            view.ui.add(layerListExpand, "bottom-left");
         });
     </script>
 
