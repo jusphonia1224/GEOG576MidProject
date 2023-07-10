@@ -180,6 +180,84 @@
 
             map.add(eventsLayer);
 
+            // ----- Settings for layer - Restaurants / Shops related -----            
+            const shopsLayer = new FeatureLayer({
+                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_1b2b3aee96e64070af0221ad89b77c0b_results/FeatureServer",
+                renderer: {
+                    type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                    field: "Subtype3",  // contains values referenced in uniqueValueInfos
+                    uniqueValueInfos: [
+                        {
+                            value: "Restaurants", 
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/restaurants-location.svg",
+                                "width": "20px",
+                                "height": "20px"
+                            }
+                        }, {
+                            value: "Shops",  
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/shops.svg",
+                                "width": "20px",
+                                "height": "20px"
+                            } 
+                        }
+                    ]
+                },  
+                definitionExpression: "Type = 'Restaurants / Shops'",
+                outFields: ["NAME","Type","Subtype3","Address","Description","RecordDate","Reference","Remarks"],
+                popupTemplate: popupTemplate
+            });
+
+            shopsLayer_titleForLegend = shopsLayer.title = shopsLayer.name = 'Restaurants / Shops';
+
+            map.add(shopsLayer);
+
+            // ----- Settings for layer - Filmed Places related -----            
+            const filmedLayer = new FeatureLayer({
+                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_1b2b3aee96e64070af0221ad89b77c0b_results/FeatureServer",
+                renderer: {
+                    type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                    field: "Subtype4",  // contains values referenced in uniqueValueInfos
+                    uniqueValueInfos: [
+                        {
+                            value: "Music Shows", 
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/rockstar.svg",
+                                "width": "20px",
+                                "height": "20px"
+                            }
+                        }, {
+                            value: "Variety Shows",  
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/filming-location.svg",
+                                "width": "20px",
+                                "height": "20px"
+                            } 
+                        }, {
+                            value: "Music Videos",  
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/videos.svg",
+                                "width": "20px",
+                                "height": "20px"
+                            } 
+                        }
+                    ]
+                },  
+                definitionExpression: "Type = 'Filmed Places'",
+                outFields: ["NAME","Type","Subtype4","Address","Description","RecordDate","Reference","Remarks"],
+                popupTemplate: popupTemplate
+            });
+
+            filmedLayer_titleForLegend = filmedLayer.title = filmedLayer.name = 'Filmed Locations';
+
+            map.add(filmedLayer);
+
             // Add the locate widget to the top left corner of the view
             view.ui.add(locateBtn, {
                 position: "top-left"
