@@ -279,14 +279,14 @@
                 view: view
             });
 
-            //view.ui.add(legend, "bottom-left");
+            view.ui.add(legend, "bottom-right");
 
             // Add Layer List Widget
             let layerList = new LayerList({
                 view: view
             });
                         
-            view.ui.add([legend,layerList], "bottom-left");
+            view.ui.add(layerList, "bottom-left");
         });
     </script>
 
