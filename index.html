@@ -86,17 +86,7 @@
                             <b>Remarks:</b> {Remarks}<br> "
             }
 
-            // ----- Settings for layer - RBW related -----
-            const rbwRenderer = {
-                "type": "simple",
-                "symbol": {
-                    "type": "picture-marker",
-                    "url": "https://jusphonia1224.github.io/GEOG576MidProject/rbw.png",
-                    "width": "20px",
-                    "height": "20px"
-                }
-            }
-
+            // ----- Settings for layer - Agency related -----
             const rbwLayer = new FeatureLayer({
                 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_1b2b3aee96e64070af0221ad89b77c0b_results/FeatureServer",
                 renderer: {
@@ -104,63 +94,91 @@
                     field: "Subtype1",  // contains values referenced in uniqueValueInfos
                     uniqueValueInfos: [
                         {
-                            value: "RBW Offices",  // features labeled as "high"
+                            value: "RBW Offices", 
                             symbol: {
                                 "type": "picture-marker",
-                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/rbw.png",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/rbw.png",
                                 "width": "20px",
                                 "height": "20px"
                             }
                         }, {
-                            value: "RBW Cafes",  // features labeled as "medium"
+                            value: "RBW Cafes",  
                             symbol: {
                                 "type": "picture-marker",
-                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/rbw.png",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/rbw_cafe.png",
                                 "width": "20px",
                                 "height": "20px"
                             } 
                         }, {
-                            value: "P Nation",  // features labeled as "low"
+                            value: "P Nation",  
                             symbol: {
                                 "type": "picture-marker",
-                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/P_Nation_logo.png",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/P_Nation_logo.png",
+                                "width": "20px",
+                                "height": "20px"
+                            }
+                        }, {
+                            value: "THE L1VE",  
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/TheL1VE.png",
                                 "width": "20px",
                                 "height": "20px"
                             }
                         }
                     ]
                 }, 
-                definitionExpression: "Type = 'Agency' ",//AND Subtype1 like 'RBW%'",
+                definitionExpression: "Type = 'Agency' ",
                 outFields: ["NAME","Type","Subtype1","Address","Description","RecordDate","Reference","Remarks"],
                 popupTemplate: popupTemplate
             });
 
-            rbwLayer_titleForLegend = rbwLayer.title = rbwLayer.name = 'RBW';
+            rbwLayer_titleForLegend = rbwLayer.title = rbwLayer.name = 'Agency';
 
             map.add(rbwLayer);
 
-            // ----- Settings for layer - P Nation related -----
-            const pNationRenderer = {
-                "type": "simple",
-                "symbol": {
-                    "type": "picture-marker",
-                    "url": "https://jusphonia1224.github.io/GEOG576MidProject/P_Nation_logo.png",
-                    "width": "20px",
-                    "height": "20px"
-                }
-            }
-
-            const pNationLayer = new FeatureLayer({
+            // ----- Settings for layer - Events related -----            
+            const eventsLayer = new FeatureLayer({
                 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_1b2b3aee96e64070af0221ad89b77c0b_results/FeatureServer",
-                renderer: pNationRenderer, 
-                definitionExpression: "Type = 'Agency' AND Subtype1 like 'P Nation%'",
-                outFields: ["NAME","Type","Subtype1","Address","Description","RecordDate","Reference","Remarks"],
+                renderer: {
+                    type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                    field: "Subtype1",  // contains values referenced in uniqueValueInfos
+                    uniqueValueInfos: [
+                        {
+                            value: "Concerts", 
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/concert.jpg",
+                                "width": "20px",
+                                "height": "20px"
+                            }
+                        }, {
+                            value: "Fan Meetings",  
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/fanmeeting.png",
+                                "width": "20px",
+                                "height": "20px"
+                            } 
+                        }, {
+                            value: "Special Events",  
+                            symbol: {
+                                "type": "picture-marker",
+                                "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/events.svg",
+                                "width": "20px",
+                                "height": "20px"
+                            }
+                        }
+                    ]
+                },  
+                definitionExpression: "Type = 'Events'",
+                outFields: ["NAME","Type","Subtype2","Address","Description","RecordDate","Reference","Remarks"],
                 popupTemplate: popupTemplate
             });
 
-            pNationLayer_titleForLegend = pNationLayer.title = pNationLayer.name = 'P NATION';
+            eventsLayer_titleForLegend = eventsLayer.title = eventsLayer.name = 'Events Venue';
 
-            map.add(pNationLayer);
+            map.add(eventsLayer);
 
             // Add the locate widget to the top left corner of the view
             view.ui.add(locateBtn, {
