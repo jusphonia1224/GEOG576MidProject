@@ -82,7 +82,7 @@
                 "content": "<b>Type:</b> {Type} - {Subtype1}{Subtype2}{Subtype3}{Subtype4}<br> \
                             <b>Address:</b> {Address}<br> \
                             <b>Description:</b> {Description}<br> \
-                            <b>Record Date:</b> ${RecordDate:DateString(local: true, hideTime: true)}<br> \
+                            <b>Record Date:</b> {RecordDate}<br> \
                             <b>Reference:</b> {Reference}<br> \
                             <b>Remarks:</b> {Remarks}<br> "
             }
@@ -279,14 +279,14 @@
                 view: view
             });
 
-            view.ui.add(legend, "bottom-left");
+            //view.ui.add(legend, "bottom-left");
 
             // Add Layer List Widget
             let layerList = new LayerList({
                 view: view
             });
                         
-            view.ui.add(layerList, "bottom-left");
+            view.ui.add([legend,layerList], "bottom-left");
         });
     </script>
 
