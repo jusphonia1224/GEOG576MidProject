@@ -13,7 +13,7 @@
         #viewDiv {
             padding: 0;
             margin: 0;
-            height: 95%;
+            height: 95.5%;
             width: 100%;
         }
 
@@ -22,11 +22,11 @@
         }
 
         .addRecordBtn {
-            position: absolute;
+            position: fixed;
             z-index: 10;
-            top: 25px;
-            right: 50px;
-            background-color: #0079c1;
+            bottom: 80px;
+            right: 20px;
+            background-color: green;
             color: white;
             padding: 8px 16px;
             border: none;
@@ -37,13 +37,50 @@
         }
 
         .addRecordBtn:hover {
-            background-color: #005a87;
+            background-color: white;
+            color: green
         }
 
     </style>
 
     <!-- import css and esri.js lib -->
     <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
+
+    <style>
+
+        .esri-search {
+            background-color: white; 
+            color: white; 
+        }
+        
+        .esri-search-button {
+            background-color: green; 
+            color: green;
+        }
+
+        .esri-locate {
+            background-color: green; 
+            color: white;
+            outline-style: solid;
+            outline-color: white;
+            outline-width: 2px;
+        }
+
+        .esri-widget--button {
+            background-color: green;
+            color: white;
+            
+        }
+        
+        .esri-widget--button:hover {
+            background-color: white;
+            color: green;
+        }
+
+
+
+    </style>
+
     <script src="https://js.arcgis.com/4.26/"></script>
 
     <!-- loading modules -->
@@ -104,32 +141,32 @@
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/rbw.png",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             }
                         }, {
                             value: "RBW Cafes",  
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/rbw_cafe.png",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             } 
                         }, {
                             value: "P Nation",  
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/P_Nation_logo.png",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             }
                         }, {
                             value: "THE L1VE",  
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/TheL1VE.png",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             }
                         }
                     ]
@@ -155,24 +192,24 @@
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/concert.jpg",
-                                "width": "25px",
-                                "height": "15px"
+                                "width": "45px",
+                                "height": "45px"
                             }
                         }, {
                             value: "Fan Meetings",  
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/fanmeeting.png",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             } 
                         }, {
                             value: "Special Events",  
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/events.svg",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             }
                         }
                     ]
@@ -198,16 +235,16 @@
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/restaurants-location.svg",
-                                "width": "25px",
-                                "height": "25px"
+                                "width": "45px",
+                                "height": "45px"
                             }
                         }, {
                             value: "Shops",  
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/shops.svg",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             } 
                         }
                     ]
@@ -233,24 +270,24 @@
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/rockstar.svg",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             }
                         }, {
                             value: "Variety Shows",  
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/filming-location.svg",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             } 
                         }, {
                             value: "Music Videos",  
                             symbol: {
                                 "type": "picture-marker",
                                 "url": "https://jusphonia1224.github.io/GEOG576MidProject/logo/videos.svg",
-                                "width": "20px",
-                                "height": "20px"
+                                "width": "40px",
+                                "height": "40px"
                             } 
                         }
                     ]
@@ -308,12 +345,27 @@
     </script>
 
   </head>
+
   <body>
     <header id="header">
+
+        <style>
+            h1 {
+              font-family: Verdana;
+              font-size: 48px;
+              color: green;
+              text-align: left;
+              margin-top: 2px ;
+              margin-bottom: 2px;
+            }
+          </style>
+
         <div id="header_title">
-            <h1 style="color: green">MAMAMOO</h1>
+            <h1>MAMAMOO</h1>
         </div>
+
         <a href="https://arcg.is/00iuyj"target="_blank" class="addRecordBtn">Add Record</a>
+
     </header>
     <div id="viewDiv"></div>
     <footer style="text-align:center"> University of Wisconsin - Madison - GEOG576 Mid Project - By Jusphonia Ho</footer>
